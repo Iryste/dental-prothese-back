@@ -1,0 +1,23 @@
+
+services:
+  db_dentalprothese:
+    image: postgres
+    container_name: db_dentalprothese
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+    ports:
+      - '5439:5432'
+    volumes:
+      - db_dentalprothese:/var/lib/postgresql/data
+    networks:
+      - net_dentalprothese
+
+volumes:
+  db_dentalprothese:
+
+networks:
+  net_dentalprothese:
+    driver: bridge
