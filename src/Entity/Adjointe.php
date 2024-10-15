@@ -27,6 +27,9 @@ class Adjointe
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $prix3 = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $description = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Adjointe
     public function setPrix3(?string $prix3): static
     {
         $this->prix3 = $prix3;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
