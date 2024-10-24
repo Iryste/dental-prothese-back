@@ -35,8 +35,6 @@ public function submitForm(Request $request, MailerInterface $mailer, CsrfTokenM
     
     
     // $submittedCsrfToken = $request->headers->get('X-CSRF-Token');
-
-
     
     $token = new CsrfToken('submit_form', $request->headers->get('X-CSRF-Token'));
 
@@ -46,18 +44,12 @@ public function submitForm(Request $request, MailerInterface $mailer, CsrfTokenM
         error_log("Token CSRF valide");
     }
 
-
-
-
     // if (!$csrfTokenManager->isTokenValid(new CsrfToken('submit_form', $submittedCsrfToken))) {
     //     error_log("Token CSRF invalide");
     //     return new JsonResponse(['message' => 'Token CSRF invalide'], 400);
     // } else {
     //     error_log("Token CSRF valide");
     // }
-
-
-
         
         $email = (new Email())
             ->from($data['email'])

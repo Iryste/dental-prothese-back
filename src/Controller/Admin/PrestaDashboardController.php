@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 
 use App\Entity\Adjointe;
+use App\Entity\Materiau;
 use App\Entity\Conjointe;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,7 +24,7 @@ class PrestaDashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Dental Prothese Back');
+            ->setTitle('Administration du site Dental Prothese');
     }
 
 
@@ -32,5 +33,6 @@ class PrestaDashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Adjointes', 'fas fa-list', Adjointe::class);
         yield MenuItem::linkToCrud('Conjointes', 'fas fa-list', Conjointe::class);
+        yield MenuItem::linkToCrud('Materiaux', 'fas fa-list', Materiau::class);
     }
 }

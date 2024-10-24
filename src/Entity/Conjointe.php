@@ -18,11 +18,12 @@ class Conjointe
     #[ORM\Column(length: 255)]
     private ?string $Title = null;
 
-    #[ORM\Column]
-    private ?string $prix = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\ManyToOne(targetEntity: Materiau::class, fetch: 'EAGER')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Materiau $materiau = null;
 
     public function getId(): ?int
     {
@@ -41,18 +42,6 @@ class Conjointe
         return $this;
     }
 
-    public function getPrix(): ?string
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(string $prix): static
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -61,6 +50,19 @@ class Conjointe
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getMateriau(): ?Materiau
+    {
+        return $this->materiau;
+    }
+
+
+    public function setMateriau(?Materiau $materiau): static
+    {
+        $this->materiau = $materiau;
 
         return $this;
     }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AdjointesRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AdjointesRepository::class)]
 #[ApiResource]
@@ -13,22 +14,21 @@ class Adjointe
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['adjointe:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['adjointe:read'])]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $prix = null;
-
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $prix2 = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $prix3 = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['adjointe:read'])]
     private ?string $description = null;
+
+    #[ORM\ManyToOne(targetEntity: Materiau::class, fetch: 'EAGER')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['adjointe:read'])]
+    private ?Materiau $materiau = null;
 
     public function getId(): ?int
     {
@@ -47,42 +47,6 @@ class Adjointe
         return $this;
     }
 
-    public function getPrix(): ?string
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(string $prix): static
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    public function getPrix2(): ?string
-    {
-        return $this->prix2;
-    }
-
-    public function setPrix2(?string $prix2): static
-    {
-        $this->prix2 = $prix2;
-
-        return $this;
-    }
-
-    public function getPrix3(): ?string
-    {
-        return $this->prix3;
-    }
-
-    public function setPrix3(?string $prix3): static
-    {
-        $this->prix3 = $prix3;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -91,6 +55,19 @@ class Adjointe
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getMateriau(): ?Materiau
+    {
+        return $this->materiau;
+}
+
+
+    public function setMateriau(?Materiau $materiau): static
+    {
+        $this->materiau = $materiau;
 
         return $this;
     }
